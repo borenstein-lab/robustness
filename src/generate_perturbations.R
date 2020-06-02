@@ -73,13 +73,13 @@ num_taxa = nrow(taxonomic_profile_table)
 # Save the number of reads to keep read counts constant between original profile and perturbations
 num_reads = sum(unlist(taxonomic_profile_table[,2,with=F]))
 
+# Remove rows without NSTI data from the genome content table (either KO descriptions or blank rows)
+genome_content_table = na.omit(genome_content_table, ncol(genome_content_table))
+
 # Remove functions from the genome content table that have been labeled on non-bacterial
 bacterial_functions = unlist(bacterial_function_table)
 bacterial_function_filtered_content_cols = c(1, which(colnames(genome_content_table) %in% bacterial_functions))
 genome_content_table = genome_content_table[,bacterial_function_filtered_content_cols,with=F]
-
-# Remove rows without NSTI data from the genome content table (either KO descriptions or blank rows)
-genome_content_table = na.omit(genome_content_table, ncol(genome_content_table))
 
 ###############################################################################
 
