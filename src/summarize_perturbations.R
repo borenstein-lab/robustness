@@ -77,13 +77,13 @@ genome_content_table = genome_content_table[which(taxon %in% taxonomic_profile_t
 taxonomic_profile_table = taxonomic_profile_table[order(taxon)]
 genome_content_table = genome_content_table[order(taxon)]
 
+# Remove rows without NSTI data from the genome content table (either KO descriptions or blank rows)
+genome_content_table = na.omit(genome_content_table, ncol(genome_content_table))
+
 # Remove functions from the genome content table that have not been labeled bacterial
 bacterial_functions = unlist(bacterial_function_table)
 bacterial_function_filtered_content_cols = c(1, which(colnames(genome_content_table) %in% bacterial_functions))
 genome_content_table = genome_content_table[,bacterial_function_filtered_content_cols,with=F]
-
-# Remove rows without NSTI data from the genome content table (either KO descriptions or blank rows)
-genome_content_table = na.omit(genome_content_table, ncol(genome_content_table))
 
 # Normalize pathway contributions for each function
 pathway_mapping_table[pathway_mapping_table == 0] = NA
