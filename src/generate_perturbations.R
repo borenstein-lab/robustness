@@ -58,6 +58,7 @@ bacterial_function_table = custom_read(args$bacterial_function_table, header = F
 ### Format column names of tables
 
 colnames(taxonomic_profile_table)[1] = c("taxon")
+norm_16S_table = norm_16S_table[,1:2,with=F]
 colnames(norm_16S_table) = c("taxon", "copy_number")
 colnames(genome_content_table)[1] = "taxon"
 
